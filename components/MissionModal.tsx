@@ -69,18 +69,20 @@ const MissionModal: React.FC<MissionModalProps> = ({ launch, rocket, isOpen, onC
         <div className="p-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-1">
-              <div className="mb-6 text-center">
-                <Image
-                  src={launch.links.patch?.large || launch.links.patch?.small || '/demo-pic.svg'}
-                  alt={`${launch.name} mission patch`}
-                  width={220}
-                  height={220}
-                  className="mx-auto object-contain"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/demo-pic.svg';
-                  }}
-                />
-              </div>
+              <div className="mb-6 flex justify-center">
+                <div className="relative w-[220px] h-[220px] bg-gray-200 dark:bg-gray-700 rounded-full">
+                    <Image
+                      src={launch.links.patch?.large || launch.links.patch?.small || '/demo-pic.svg'}
+                      alt={`${launch.name} mission patch`}
+                      fill
+                        sizes="(max-width: 1024px) 30vw, 220px"
+                      className="object-contain p-2"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/demo-pic.svg';
+                      }}
+                    />
+                </div>
+              </div>
 
               <div className="space-y-5">
                 <div className="p-4 bg-[var(--background)] rounded-lg">

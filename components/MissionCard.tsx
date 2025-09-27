@@ -39,18 +39,18 @@ const MissionCard: React.FC<MissionCardProps> = memo(({ launch, rocket, onClick 
           </p>
         </div>
         
-        <div className="w-20 h-20 ml-4 flex-shrink-0">
-          <Image
-            src={launch.links.patch.small || '/demo-pic.svg'}
-            alt={`${launch.name} mission patch`}
-            width={80}
-            height={80}
-            className="w-full h-full object-contain"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = '/demo-pic.svg';
-            }}
-          />
-        </div>
+        <div className="relative w-20 h-20 ml-4 flex-shrink-0 bg-gray-200 dark:bg-gray-700 rounded-full">
+          <Image
+            src={launch.links.patch.small || '/demo-pic.svg'}
+            alt={`${launch.name} mission patch`}
+            fill
+            sizes="(max-width: 768px) 10vw, 80px"
+            className="object-contain p-1"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/demo-pic.svg';
+            }}
+          />
+        </div>
       </div>
 
       <div className="mb-6 flex-grow">

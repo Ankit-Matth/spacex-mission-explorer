@@ -3,8 +3,17 @@ import { screen } from '@testing-library/react';
 import Home from './page';
 import { renderWithProviders } from '../utils/test-utils';
 
-jest.mock('@/components/SearchAndFilters', () => () => <div>SearchAndFilters</div>);
-jest.mock('@/components/MissionList', () => () => <div>MissionsList</div>);
+jest.mock('@/components/SearchAndFilters', () => {
+  const MockedSearch = () => <div>SearchAndFilters</div>;
+  MockedSearch.displayName = 'MockedSearchAndFilters';
+  return MockedSearch;
+});
+
+jest.mock('@/components/MissionList', () => {
+  const MockedMissionList = () => <div>MissionsList</div>;
+  MockedMissionList.displayName = 'MockedMissionsList';
+  return MockedMissionList;
+});
 
 const mockDispatch = jest.fn();
 

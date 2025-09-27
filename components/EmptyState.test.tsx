@@ -4,7 +4,12 @@ import { renderWithProviders } from '../utils/test-utils';
 import MissionsList from '@/components/MissionList';
 import { mockLaunches, mockRockets } from '../utils/mockData';
 
-jest.mock('@/components/MissionCard', () => () => <div data-testid="mission-card" />);
+jest.mock('@/components/MissionCard', () => {
+  const MockedMissionCard = () => <div data-testid="mission-card" />;
+  MockedMissionCard.displayName = 'MockedMissionCard';
+  return MockedMissionCard;
+});
+
 jest.mock('@/components/MissionModal', () => () => null);
 
 describe('MissionsList Component - Empty State Scenarios', () => {

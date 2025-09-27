@@ -5,11 +5,14 @@ import { renderWithProviders } from '../utils/test-utils';
 import { mockLaunches, mockRockets } from '../utils/mockData';
 import MissionsList from './MissionList';
 
-jest.mock('./SearchAndFilters', () => () => <div>SearchAndFilters Mock</div>);
+jest.mock('./SearchAndFilters', () => {
+  const MockedSearchAndFilters = () => <div>SearchAndFilters Mock</div>;
+  MockedSearchAndFilters.displayName = 'SearchAndFilters';
+  return MockedSearchAndFilters;
+});
 
 describe('User Interactions', () => {
   it('renders a list of missions and filters for successful launches only', async () => {
-    const user = userEvent.setup();
     const { store } = renderWithProviders(<MissionsList />, {
       preloadedState: {
         launches: {
