@@ -48,7 +48,7 @@ npm install
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 
 ## Build for Production
@@ -59,3 +59,18 @@ npm start
 ```
 
 ## Run Tests
+
+This project uses Jest and React Testing Library for unit and integration testing.
+
+-   **Run all tests once:**
+    ```bash
+    npm test
+    ```
+-   **Run tests in watch mode (re-runs on file changes):**
+    ```bash
+    npm run test:watch
+    ```
+-   **Run tests with detailed output:**
+    ```bash
+    npm run test:verbose
+    ```

@@ -46,7 +46,7 @@ const MissionModal: React.FC<MissionModalProps> = ({ launch, rocket, isOpen, onC
       className={`fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 transition-opacity duration-300 ${
         isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
-      onClick={handleBackdropClick}
+      onClick={handleBackdropClick} role="dialog"
     >
       <div
         className={`bg-[var(--card-background)] rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto transform transition-transform duration-300 ${
