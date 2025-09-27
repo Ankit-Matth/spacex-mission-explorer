@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { fetchLaunches, fetchRockets } from '@/store/launchesSlice';
 import SearchAndFilters from '@/components/SearchAndFilters';
@@ -9,6 +9,7 @@ import ErrorMessage from '@/components/ErrorMessage';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
 import Link from 'next/link';
 import Image from 'next/image';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -27,27 +28,28 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
+    <div className="min-h-screen bg-[var(--background)]">
+      <header className="bg-[var(--card-background)] text-[var(--foreground)] shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between animate-fade-in-down space-y-4 md:space-y-0">
-            
             <div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">
                 Atmosly • SpaceX Mission Explorer
               </h1>
-              <p className="mt-2 text-sm sm:text-base text-indigo-200">
+              <p className="mt-2 text-sm sm:text-base text-gray-400">
                 Your portal to the cosmos of SpaceX achievements.
               </p>
             </div>
 
-            <div className="flex items-center space-x-2 sm:space-x-3 bg-white/10 backdrop-blur-sm rounded-full px-3 py-2 text-sm sm:text-base">
-              <Image src={'red-heart.svg'} alt='Favourite' width={20} height={20}  />
-              <span className="font-semibold text-white">
-                {isClient ? `${favorites.length} Favorites` : '...'}
-              </span>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 sm:space-x-3 bg-black/20 backdrop-blur-sm rounded-full px-3 py-2 text-sm lg:text-base">
+                <Image src={'/red-heart.svg'} alt="Favourite" width={20} height={20} />
+                <span className="font-semibold text-[var(--foreground)]">
+                  {isClient ? `${favorites.length} Favorites` : '...'}
+                </span>
+              </div>
+              <ThemeToggle /> 
             </div>
-
           </div>
         </div>
       </header>
@@ -60,15 +62,15 @@ export default function Home() {
         {loading ? (
           <LoadingSkeleton />
         ) : error ? (
-          <ErrorMessage message='Failed to fetch data.' onRetry={handleRetry} />
+          <ErrorMessage message="Failed to fetch data." onRetry={handleRetry} />
         ) : (
           <MissionsList />
         )}
       </main>
 
-      <footer className="bg-white shadow-inner mt-20">
+      <footer className="bg-[var(--card-background)] shadow-inner mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between text-gray-500">
+          <div className="flex items-center justify-between text-gray-400">
             <div className="text-sm">
               <p>
                 Data courtesy of the{' '}
@@ -76,7 +78,7 @@ export default function Home() {
                   href="https://github.com/r-spacex/SpaceX-API"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-indigo-600 hover:text-indigo-800 transition-colors"
+                  className="font-semibold text-[var(--primary)] hover:brightness-125 transition-colors"
                 >
                   SpaceX-API Project
                 </Link>

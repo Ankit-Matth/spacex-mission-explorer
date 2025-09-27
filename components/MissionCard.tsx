@@ -1,6 +1,6 @@
 'use client';
 
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { Launch, Rocket } from '@/types/spacex';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { toggleFavorite } from '@/store/launchesSlice';
@@ -27,14 +27,14 @@ const MissionCard: React.FC<MissionCardProps> = memo(({ launch, rocket, onClick 
 
   return (
     <div
-      className="bg-white rounded-lg shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+      className="bg-[var(--card-background)] rounded-lg shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col"
     >
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1 min-w-0">
-          <h3 className="text-xl font-bold text-gray-900 truncate mb-1">
+          <h3 className="text-xl font-bold text-[var(--foreground)] truncate mb-1">
             {launch.name}
           </h3>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             {formatDate(launch.date_utc)}
           </p>
         </div>
@@ -45,7 +45,7 @@ const MissionCard: React.FC<MissionCardProps> = memo(({ launch, rocket, onClick 
             alt={`${launch.name} mission patch`}
             width={80}
             height={80}
-            className="w-full h-full object-contain rounded-full"
+            className="w-full h-full object-contain"
             onError={(e) => {
               (e.target as HTMLImageElement).src = '/demo-pic.svg';
             }}
@@ -53,21 +53,21 @@ const MissionCard: React.FC<MissionCardProps> = memo(({ launch, rocket, onClick 
         </div>
       </div>
 
-      <div className="mb-6">
-        <p className="text-base text-gray-700">
+      <div className="mb-6 flex-grow">
+        <p className="text-base text-[var(--foreground)]">
           <span className="font-semibold">Rocket:</span> {rocket?.name || 'N/A'}
         </p>
         {launch.details && (
-          <p className="text-sm text-gray-600 mt-2 italic">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 italic">
             {truncateText(launch.details, 120)}
           </p>
         )}
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-auto">
         <div className="flex items-center space-x-3">
           <div className={`w-4 h-4 rounded-full ${statusColor}`}></div>
-          <span className="text-base font-semibold text-gray-800">{statusText}</span>
+          <span className="text-base font-semibold text-[var(--foreground)]">{statusText}</span>
         </div>
         
         <div className="flex items-center space-x-3">
@@ -75,8 +75,8 @@ const MissionCard: React.FC<MissionCardProps> = memo(({ launch, rocket, onClick 
             onClick={handleFavoriteClick}
             className={`p-2 rounded-full transition-all duration-300 transform hover:cursor-pointer hover:scale-110 ${
               isFavorite
-                ? 'text-red-500 bg-red-100'
-                : 'text-gray-400 bg-gray-100 hover:bg-red-100 hover:text-red-500'
+                ? 'bg-red-100 dark:bg-red-900/50'
+                : 'bg-gray-100 text-gray-500 hover:bg-red-100 hover:text-red-500 dark:bg-gray-700/50 dark:text-gray-400 dark:hover:bg-red-900/50 dark:hover:text-red-400'
             }`}
             aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           >
@@ -90,7 +90,7 @@ const MissionCard: React.FC<MissionCardProps> = memo(({ launch, rocket, onClick 
           
           <button 
             onClick={onClick}
-            className="px-4 py-2 text-base font-semibold bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-all duration-300"
+            className="px-4 py-2 text-base font-semibold bg-[var(--primary)] text-white rounded-lg shadow-md hover:brightness-110 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-opacity-75 transition-all duration-300"
             aria-label={`View details for ${launch.name}`}
           >
             Details

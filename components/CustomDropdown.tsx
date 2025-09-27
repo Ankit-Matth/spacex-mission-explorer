@@ -38,11 +38,11 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ options, value, onChang
       <button
         type="button"
         onClick={handleToggle}
-        className="w-full px-4 py-2 space-x-2 text-left bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent flex justify-between items-center"
+        className="w-full px-4 py-2 space-x-2 text-left bg-[var(--background)] border border-[var(--card-border)] rounded-md focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent flex justify-between items-center"
       >
         <span>{value || placeholder}</span>
         <svg
-          className={`h-5 w-5 text-gray-400 transition-transform ${isOpen ? 'transform rotate-180' : ''}`}
+          className={`h-5 w-5 text-gray-500 transition-transform ${isOpen ? 'transform rotate-180' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -51,12 +51,11 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ options, value, onChang
         </svg>
       </button>
       {isOpen && (
-        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+        <div className="absolute z-10 w-full mt-1 bg-[var(--background)] border border-[var(--card-border)] rounded-md shadow-lg">
           <ul className="py-1" style={{ maxHeight: `${7 * 2.5}rem`, overflowY: 'auto' }}>
             <li
               key="all-years"
-              onClick={() => handleOptionClick('')}
-              className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+              className="px-3 py-2 text-sm text-[var(--foreground)] hover:bg-gray-700 cursor-pointer"
             >
               {placeholder}
             </li>
@@ -64,7 +63,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ options, value, onChang
               <li
                 key={option}
                 onClick={() => handleOptionClick(option)}
-                className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                className="px-3 py-2 text-sm text-[var(--foreground)] hover:bg-gray-700 cursor-pointer"
               >
                 {option}
               </li>

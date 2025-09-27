@@ -36,19 +36,15 @@ const MissionsList: React.FC = () => {
       if (searchTerm && !launch.name.toLowerCase().includes(searchTerm.toLowerCase())) {
         return false;
       }
-
       if (selectedYear && getYearFromDate(launch.date_utc) !== selectedYear) {
         return false;
       }
-
       if (showSuccessfulOnly && !launch.success) {
         return false;
       }
-
       if (showFavoritesOnly && !favorites.includes(launch.id)) {
         return false;
       }
-
       return true;
     });
   }, [launches, searchTerm, selectedYear, showSuccessfulOnly, showFavoritesOnly, favorites]);
@@ -89,66 +85,44 @@ const MissionsList: React.FC = () => {
   }
 
   if (filteredLaunches.length === 0) {
-    if (launches.length === 0) {
-      return (
-        <EmptyState
-          title="No missions found"
-          description="Unable to load SpaceX missions. Please check your connection and try again."
-        />
-      );
-    }
-
-    let emptyTitle = "No missions found";
-    let emptyDescription = "Try adjusting your search criteria.";
-
-    if (showFavoritesOnly && favorites.length === 0) {
-      emptyTitle = "No favorites yet";
-      emptyDescription = "Mark some missions as favorites to see them here.";
-    } else if (searchTerm) {
-      emptyTitle = `No missions match "${searchTerm}". Try a different search term.`;
-    } else if (selectedYear || showSuccessfulOnly) {
-      emptyTitle = "No missions match your filters";
-      emptyDescription = "Try removing some filters to see more results.";
-    }
-
     return (
-      <EmptyState
-        title={emptyTitle}
-        description={emptyDescription}
-        icon={
-          <svg className="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-          </svg>
-        }
-      />
+        <EmptyState
+            title="No missions found"
+            description="Try adjusting your search criteria."
+            icon={
+                <svg className="w-16 h-16 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+            }
+        />
     );
   }
 
   return (
     <>
       <div className="flex items-center justify-between mb-4">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-[var(--foreground)] opacity-80">
           Showing {paginatedLaunches.length} of {filteredLaunches.length} missions
         </p>
-        
-        <div className="flex items-center space-x-2 text-xs">
+
+        <div className="flex flex-wrap items-center justify-end gap-2 text-xs">
           {searchTerm && (
-            <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+            <span className="bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300 px-2 py-1 rounded-full">
               Search: {searchTerm}
             </span>
           )}
           {selectedYear && (
-            <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full">
+            <span className="bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300 px-2 py-1 rounded-full">
               Year: {selectedYear}
             </span>
           )}
           {showSuccessfulOnly && (
-            <span className="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full">
+            <span className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300 px-2 py-1 rounded-full">
               Successful only
             </span>
           )}
           {showFavoritesOnly && (
-            <span className="bg-red-100 text-red-800 px-2 py-1 rounded-full">
+            <span className="bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300 px-2 py-1 rounded-full">
               Favorites only
             </span>
           )}
@@ -171,17 +145,17 @@ const MissionsList: React.FC = () => {
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 text-sm font-medium text-[var(--foreground)] bg-[var(--card-background)] border border-[var(--card-border)] rounded-l-md hover:bg-[var(--background)] hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Previous
           </button>
-          <span className="px-4 py-2 text-sm text-gray-700 bg-white border-t border-b border-gray-300">
+          <span className="px-4 py-2 text-sm text-[var(--foreground)] bg-[var(--card-background)] border-t border-b border-[var(--card-border)]">
             Page {currentPage} of {totalPages}
           </span>
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:cursor-pointer hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 text-sm font-medium text-[var(--foreground)] bg-[var(--card-background)] border border-[var(--card-border)] rounded-r-md hover:bg-[var(--background)] hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Next
           </button>
@@ -195,7 +169,7 @@ const MissionsList: React.FC = () => {
         onClose={handleModalClose}
       />
     </>
-  )
+  );
 };
 
 export default MissionsList;
